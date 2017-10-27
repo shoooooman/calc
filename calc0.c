@@ -17,40 +17,42 @@ int main(int argc, char *argv[]) {
     // printf("operand = %c\n", *strp);
     switch (*strp) {
       case '+':
+        acc = calc(num, acc, last_op);
         last_op = '+';
         flag = 1;
         strp++;
         break;
       case '-':
+        acc = calc(num, acc, last_op);
         last_op = '-';
         flag = 1;
         strp++;
         break;
       case '*':
+        acc = calc(num, acc, last_op);
         last_op = '*';
         flag = 1;    
         strp++;
         break;
       case '/':
+        acc = calc(num, acc, last_op);
         last_op = '/';
         flag = 1;
         strp++;
         break;
       case '=':
+        acc = calc(num, acc, last_op);
         strp++;
         break;
       default:
         if(flag == 1) {
           num = *strp - '0';
           printf("num = %d\n", num);
-          acc = calc(num, acc, last_op);
           flag = 0;
           strp++;
         } else {
           num = num * DIGIT + (*strp - '0');
-          printf("num = %d\n", num); 
-          acc = calc(num, acc, last_op);
-          flag = 0;
+          printf("num = %d\n", num);
           strp++;
         }
         break;
@@ -75,5 +77,6 @@ int calc(int num, int acc, char last_op) {
       acc /= num;
       break;
   }
+  printf("acc = %d\n", acc);
   return acc;
 }
