@@ -11,10 +11,11 @@ int main(int argc, char *argv[]) {
   int acc = 0;
   char last_op = '+';
   int flag = 1;
+  int memory;
   
   // printf("str = %s\n", strp);
   while(*strp != '\0') {
-    // printf("operand = %c\n", *strp);
+    printf("operand = %c\n", *strp);
     switch (*strp) {
       case '+':
         acc = calc(num, acc, last_op);
@@ -42,6 +43,34 @@ int main(int argc, char *argv[]) {
         break;
       case '=':
         acc = calc(num, acc, last_op);
+        strp++;
+        break;
+      case 'C':
+        acc = calc(num, acc, last_op); 
+        memory = 0;
+        flag = 1;
+        strp++;
+        break;
+      case 'R':
+        acc = calc(num, acc, last_op); 
+        acc = memory;
+        flag = 1;
+        strp++;
+        break;
+      case 'P':
+        acc = calc(num, acc, last_op);
+        memory += acc;
+        acc = 0;
+        last_op = '+';
+        flag = 1;
+        strp++;
+        break;
+      case 'M':
+        acc = calc(num, acc, last_op);
+        memory -= acc;
+        acc = 0;
+        last_op = '+';
+        flag = 1;
         strp++;
         break;
       default:
