@@ -1,3 +1,10 @@
+/*
+TODO
+同じ処理を関数にまとめる
+符号反転を実装する
+オーバーフローなどの処理を実装する
+*/
+
 #include<stdio.h>
 #include<math.h>
 
@@ -45,6 +52,10 @@ int main(int argc, char *argv[]) {
         acc = calc(num, acc, last_op);
         strp++;
         break;
+      case 'S':
+        num *= -1;
+        strp++;
+        break;
       case 'C':
         acc = calc(num, acc, last_op); 
         memory = 0;
@@ -60,7 +71,9 @@ int main(int argc, char *argv[]) {
       case 'P':
         acc = calc(num, acc, last_op);
         memory += acc;
+        printf("memory = %d\n", memory);
         acc = 0;
+        num = 0;
         last_op = '+';
         flag = 1;
         strp++;
@@ -68,7 +81,9 @@ int main(int argc, char *argv[]) {
       case 'M':
         acc = calc(num, acc, last_op);
         memory -= acc;
+        printf("memory = %d\n", memory);
         acc = 0;
+        num = 0;
         last_op = '+';
         flag = 1;
         strp++;
@@ -80,7 +95,11 @@ int main(int argc, char *argv[]) {
           flag = 0;
           strp++;
         } else {
-          num = num * DIGIT + (*strp - '0');
+          if(num >= 0) {
+            num = num * DIGIT + (*strp - '0');
+          } else {
+            num = num * DIGIT - (*strp - '0');
+          }
           printf("num = %d\n", num);
           strp++;
         }
